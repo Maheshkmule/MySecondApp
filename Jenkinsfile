@@ -1,33 +1,35 @@
-pipeline{
-agent any
-stages 
-{
-stage('Build') 
-{
-steps{
-echo "Building the Code.........."
-bat "mvn clean"
-}
-}
-stage('Test') 
-{
-steps{
-echo "Testing the Code.........."
-bat "mvn test"
-}
-}
-stage('Compile') 
-{
-steps{
-echo "Compiling the Project.........."
-bat "mvn compile"
-}
-}
-stage('Deploy') 
-{
-steps{
-echo "Deploying the Project.........."
-}
-}
-}
+pipeline {
+    agent any 
+    stages {
+        stage('Static Analysis') {
+            steps {
+                echo 'Run the static analysis to the code' 
+            }
+        }
+        stage('Compile') {
+            steps {
+                echo 'Compile the source code' 
+            }
+        }
+        stage('Security Check') {
+            steps {
+                echo 'Run the security check against the application' 
+            }
+        }
+        stage('Run Unit Tests') {
+            steps {
+                echo 'Run unit tests from the source code' 
+            }
+        }
+        stage('Run Integration Tests') {
+            steps {
+                echo 'Run only crucial integration tests from the source code' 
+            }
+        }
+        stage('Publish Artifacts') {
+            steps {
+                echo 'Save the assemblies generated from the compilation' 
+            }
+        }
+    }
 }
